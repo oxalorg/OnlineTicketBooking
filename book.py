@@ -6,6 +6,7 @@ from contextlib import closing
 from flask import g
 from flask import session, redirect, url_for, \
              abort, flash
+from random import randint
 
 app = Flask(__name__)
 
@@ -48,9 +49,10 @@ def index():
 
 @app.route('/')
 def show_entries():
+    price = 0
     cur = g.db.execute('select train, seat, empty from entries')
-    entries = [dict(train=row[0], seat=row[1]) for row in cur.fetchall() if row[2] == 0]
-    return render_template('show_entries.html', entries=entries)
+    entries = [dict(train=row[0], seat=row[1], price=randint(400,2300)) for row in cur.fetchall() if row[2] == 0]
+    return render_template('show_entries.html', entries=entries, price=price)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -16,7 +16,7 @@
             <td>
                 <select name=pseat>
                     {% for entry in entries %}
-                        <option value="{{ entry.seat }}">Train: {{ entry.train }}, Seat: {{ entry.seat }}</option>
+                    <option value="{{ entry.seat }}">Train: {{ entry.train }}, Seat: {{ entry.seat }}, Price: {{ entry.price }}</option>
                     {% else %}
                     <option disabled> No tickets available.</option>
                     {% endfor %}
